@@ -276,6 +276,7 @@ details.tbl-details[open] summary .ic{transform:rotate(90deg);}
   transition:background .15s,transform .15s;
 }
 .my-cta b{font-weight:800;}
+.my-cta .nw{white-space:nowrap;} /* 줄바꿈은 물음표 뒤에서만 */
 .my-cta .ic{color:var(--accent-d);}
 .my-cta:hover{background:#eeddc9;transform:translateY(-1px);}
 
@@ -1230,7 +1231,7 @@ function runMyScore(){
       +'<div class="pos-scale"><span>0점</span><span>100점</span></div>'
       +'</div>';
     const rankStr = tr.best===tr.worst ? '<b>'+tr.best.toLocaleString('ko-KR')+'등</b>'
-      : '<b>'+tr.best.toLocaleString('ko-KR')+'~'+tr.worst.toLocaleString('ko-KR')+'등</b>';
+      : '<b>'+tr.best.toLocaleString('ko-KR')+'~'+tr.worst.toLocaleString('ko-KR')+'등 구간</b>';
     html+='<p class="my-rank">* 해당 직렬 응시자 '+fmtN(tr.n)+'명 중 '+rankStr+'에 해당합니다.</p>';
   }
 
@@ -1254,8 +1255,7 @@ function runMyScore(){
 
   /* 분석 결과 하단: guide 맞춤 활용법 찾기 연결 */
   html+='<a class="my-cta" href="https://bamdori-psat.github.io/guide/#finder">'
-    +'어떻게 공부할지 고민된다면? <b>맞춤 활용법 찾기</b>'
-    +'<svg class="ic"><use href="#ic-arrow-right"/></svg></a>';
+    +'<span><span class="nw">어떻게 공부할지 고민된다면?</span> <span class="nw"><b>밤도리 맞춤 활용법 찾기</b></span></span></a>';
 
   html+='</div>';
   box.hidden=false; box.innerHTML=html;
