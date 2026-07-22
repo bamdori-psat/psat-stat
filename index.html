@@ -1269,6 +1269,25 @@ document.getElementById('myGo').addEventListener('click', runMyScore);
   document.getElementById(id).addEventListener('keydown', e=>{ if(e.key==='Enter') runMyScore(); });
 });
 
+/* 모바일: 차트 밖(빈 영역) 터치 시 툴팁 닫기 */
+function clearChartTooltips(){
+  [cutChart, distChart].forEach(ch=>{
+    if(!ch || !ch.tooltip) return;
+    if(ch.tooltip.getActiveElements().length){
+      ch.tooltip.setActiveElements([], {x:0,y:0});
+      ch.setActiveElements([]);
+      ch.update();
+    }
+  });
+}
+['touchstart','click'].forEach(ev=>{
+  document.addEventListener(ev, e=>{
+    const t=e.target;
+    if(t && (t.id==='cutChart' || t.id==='distChart')) return; /* 차트 위 터치는 차트가 처리 */
+    clearChartTooltips();
+  }, {passive:true});
+});
+
 /* ================= 초기화 ================= */
 renderCutControls(); renderCutChart(); renderCutTable();
 initDistDefaults(); renderDistControls(); renderDistChart(); renderDistTable();
